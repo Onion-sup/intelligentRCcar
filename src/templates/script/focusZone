@@ -1,0 +1,3 @@
+$.document onload 
+
+	fct focus $("lenomdetoninput").focus()

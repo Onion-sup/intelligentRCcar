@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>main page</title>
+ <style>
+body {
+    background-color: lightblue;
+}
+#video {
+	height: 100%;
+    width: 100%;
+	border-radius:10px
+}
+
+</style>
+  </head>
+  <body>
+    <img id="video" src="{{url_for('video_freed')}}">
+	<img src="static/img/left.jpg" >
+	<img src="static/img/up.jpg">
+	<img src="static/img/down.jpg" ></img>
+  </body>
+</html>

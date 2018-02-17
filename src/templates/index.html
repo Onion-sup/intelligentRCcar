@@ -1,0 +1,119 @@
+<html>
+	  <head>
+	    		<title>main page</title>
+			 <style>
+					body{ 
+						width:100%;
+						margin-left:auto;
+						margin-right:auto;
+						background: #232526;  /* fallback for old browsers */
+						background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+						background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+						color: white;
+					}
+
+					.container{
+						width:100%;
+						margin: 0 auto;
+					}
+					#directions{
+						text-align: gray;
+						border-color: black;
+						background: #616161;  /* fallback for old browsers */
+						background: -webkit-linear-gradient(to right, #9bc5c3, #616161);  /* Chrome 10-25, Safari 5.1-6 */
+						background: linear-gradient(to right, #9bc5c3, #616161); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+					}
+					
+
+					.row{
+						margin:10px;
+					}
+
+					.container .title{
+						padding: 10px 24px;
+						text-align: center;
+					}
+
+					.container .video_flow{
+						color:black;
+						margin: 0 auto;
+    						width: 60%;
+					}
+
+					#video {
+						border-radius: 10px;
+						width: 100%;
+					}
+
+					.container .gestures{
+						padding: 40px;
+						text-align:center;
+					}
+
+					.test{
+						/*border: 1px dashed red;*/
+					}
+								</style>
+			<script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
+	  </head>
+	  <body>
+		<div class="container test">
+			<div class="row title test">
+				<h2>My RC CAR </h2>
+			</div>
+			<div class="row video_flow test">
+	    			<img id="video" class="test" src="{{url_for('video_freed')}}">
+			</div>
+			<div class="row gestures test">
+				<b> Cliquer sur la zone de texte et appuyez sur les flèches du clavier pour controler votre voiture </b></br></br>
+				<input id="directions"  autofocus/>
+				<h3>Phares</h3>
+				<input type="radio" name="lights" value="on" > <b>ON</b>
+				<input type="radio" name="lights" value="off" checked> <b>OFF	
+			</div>
+		</div>
+		<script>
+
+			$('#directions').keydown(function(e) {
+				switch (e.keyCode){
+					case 37 : $.post("/control_car", {direction: "left", position:"down"});
+							break;
+					case 38 : $.post("/control_car", {direction: "fwd", position:"down"});
+							break;
+					case 39 : $.post("/control_car", {direction: "right", position:"down"});
+							break;
+					case 40 : $.post("/control_car", {direction: "bwd", position:"down"});
+							break;
+				}
+			});
+			$('#directions').keyup(function(e) {
+				switch (e.keyCode){
+					case 37 : $.post("/control_car", {direction: "left", position:"up"});
+							break;
+					case 38 : $.post("/control_car", {direction: "fwd", position:"up"});
+							break;
+					case 39 : $.post("/control_car", {direction: "right", position:"up"});
+							break;
+					case 40 : $.post("/control_car", {direction: "bwd", position:"up"});
+							break;
+				}
+					
+				console.log(e.keyCode);
+			});
+			$(":radio").change(function(){
+				if (this.value == 'on') {
+					$.post("/lights", {lights: "on"});
+				}
+				else if (this.value == 'off') {
+				    $.post("/lights", {lights: "off"});
+				}
+			});
+
+
+
+		</script>
+	  </body>
+</html>
