@@ -59,6 +59,13 @@ def lights_ajax():
 	carControl.lights(request.form['lights'])
 	return 'ok'
 
+@app.route('/detection', methods=['POST'])
+def detection_ajax():
+	if (request.form['detection'] == 'yes'):
+		Camera.detection = True
+	elif (request.form['detection']=='no'):
+		Camera.detection  = False
+	return 'ok'
 
 if __name__ == '__main__':
     	app.run(debug=True, host='0.0.0.0', threaded=True)

@@ -1,7 +1,8 @@
 import cv2
 
-from base_camera import base_camera as base
-
+import base_camera as base
+import objectDetect
+detection = False
 
 class Camera(base.BaseCamera):
     video_source = 0
@@ -17,8 +18,11 @@ class Camera(base.BaseCamera):
             raise RuntimeError('Could not start camera.')
 
         while True:
-            # read current frame
-            _, img = camera.read()
+		# read current frame
+		_, img = camera.read()
+		#############	 object detection	#############
+		if (detection):
+			img = objectDetect.object_detection(img)
+		# encode as a jpeg image and return it
+		yield cv2.imencode('.jpg', img)[1].tostring()
 
-            # encode as a jpeg image and return it
-            yield cv2.imencode('.jpg', img)[1].tostring()

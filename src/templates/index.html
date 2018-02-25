@@ -73,6 +73,9 @@
 				<h3>Phares</h3>
 				<input type="radio" name="lights" value="on" > <b>ON</b>
 				<input type="radio" name="lights" value="off" checked> <b>OFF	
+				<h3>Activer la reconnaissance d'objets</h3>
+				<input type="radio" name="object_detection" value="yes" > <b>OUI</b>
+				<input type="radio" name="object_detection" value="no" checked> <b>NON	
 			</div>
 		</div>
 		<script>
@@ -103,15 +106,28 @@
 					
 				console.log(e.keyCode);
 			});
-			$(":radio").change(function(){
+			$(':radio').change(function(){
 				if (this.value == 'on') {
 					$.post("/lights", {lights: "on"});
 				}
 				else if (this.value == 'off') {
 				    $.post("/lights", {lights: "off"});
 				}
+				if (this.value == 'yes') {
+					$.post("/detection", {detection: "yes"});
+				}
+				else if (this.value == 'no') {
+				    $.post("/detection", {detection: "no"});
+				}
 			});
-
+			/*$(":radio").change(function(){
+				if (this.value == 'on') {
+					$.post("/lights", {lights: "on"});
+				}
+				else if (this.value == 'off') {
+				    $.post("/lights", {lights: "off"});
+				}
+			});*/
 
 
 		</script>
