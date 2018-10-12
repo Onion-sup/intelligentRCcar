@@ -5,7 +5,7 @@ from flask import Flask, render_template, Response, request
 from camera import Camera
 import carControl
 
-
+time.sleep(10)
 
 app = Flask(__name__)
 

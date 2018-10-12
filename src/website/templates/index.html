@@ -81,6 +81,7 @@
 		<script>
 
 			$('#directions').keydown(function(e) {
+				console.log(e.keyCode);
 				switch (e.keyCode){
 					case 37 : $.post("/control_car", {direction: "left", position:"down"});
 							break;
@@ -93,6 +94,7 @@
 				}
 			});
 			$('#directions').keyup(function(e) {
+				console.log(e.keyCode);
 				switch (e.keyCode){
 					case 37 : $.post("/control_car", {direction: "left", position:"up"});
 							break;

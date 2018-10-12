@@ -4,24 +4,30 @@ GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+ENA = 16
 IN1 = 13
 IN2 = 19
-ENA = 16
+
+ENB = 20
 IN3 = 7
 IN4 = 8
+
 GPIO.setup(ENA, GPIO.OUT)
+GPIO.setup(ENB, GPIO.OUT)
 GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 
-duty_cycle_direction = 90
+duty_cycle_motor = 100
+duty_cycle_direction = 38
 
+motor_PWM = GPIO.PWM(ENB, 100)
 direction_PWM = GPIO.PWM(ENA, 100)
 direction_PWM.start(duty_cycle_direction)
+motor_PWM.start(duty_cycle_motor)
 
-
-def motor(way):
+def steering(way):
 	if way == -1:
 			GPIO.output(IN1, GPIO.HIGH)
 			GPIO.output(IN2, GPIO.LOW)
@@ -32,7 +38,7 @@ def motor(way):
 			GPIO.output(IN1, GPIO.LOW)
 			GPIO.output(IN2, GPIO.HIGH)
 
-def steering(way):
+def motor(way):
 	if way == -1:
 			GPIO.output(IN3, GPIO.HIGH)
 			GPIO.output(IN4, GPIO.LOW)

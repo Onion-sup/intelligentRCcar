@@ -6,12 +6,12 @@ import cv2
 # detect, then generate a set of bounding box colors for each class
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
-	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
+	"dog", "horse", "motorbike", "person", "pottedplant", "kebab",
 	"sofa", "train", "tvmonitor"]
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
 # load our serialized model from disk
-net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt" , "MobileNetSSD_deploy.caffemodel")
+net = cv2.dnn.readNetFromCaffe("/home/pi/github/intelligentRCcar/src/MobileNetSSD_deploy.prototxt.txt" , "/home/pi/github/intelligentRCcar/src/MobileNetSSD_deploy.caffemodel")
 
 def object_detection(image):
 	(h, w) = image.shape[:2]
